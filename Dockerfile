@@ -7,7 +7,6 @@ COPY .env /src
 COPY babel.config.js /src
 COPY package-lock.json /src
 COPY package.json /src
-COPY vue.config.js /src
 COPY ecosystem.js /src
 WORKDIR /src
 RUN VUE_APP_GRAPHQL_API=$VUE_APP_GRAPHQL_API npm install && NODE_ENV=production npm run build && cp -R dist / && rm -rf /src
