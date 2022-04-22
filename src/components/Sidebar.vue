@@ -20,16 +20,16 @@ export default {
   data: () => ({
     links: [
       { title: "Смена", url: "/", exact: true },
-      { title: "Корнеры", url: "/corners" },
+      { title: "Киоски", url: "/kiosks" },
+      //{ title: "Корнеры", url: "/corners" },
       { title: "Группы товаров", url: "/groups" },
       { title: "Товары", url: "/Products" },
       { title: "Модификаторы", url: "/Mods" },
-      { title: "Заготовки", url: "/Items" },
+      //{ title: "Заготовки", url: "/Items" },
       { title: "Пользователи", url: "/Users" },
-      { title: "Рабочий стол", url: "/tabAdm" },
-      { title: "Стол заготовок", url: "/tabAdmItems" },
-      { title: "Экран гостя", url: "/admeo" },
-
+      //{ title: "Рабочий стол", url: "/tabAdm" },
+      //{ title: "Стол заготовок", url: "/tabAdmItems" },
+      { title: "Экран гостя", url: "/admeo" }
     ]
   })
 };

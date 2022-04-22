@@ -4,13 +4,14 @@
       <h3>Группы товаров</h3>
     </div>
 
-    <ModalGroups @close="refresh()" :group="group" v-if="isOpen"/>
+    <ModalGroups @close="refresh()" :group="group" v-if="isOpen" />
 
     <section v-if="items">
       <table>
         <thead>
           <tr>
             <th>#</th>
+            <th></th>
             <th>Наименование</th>
             <th>Редактировать</th>
             <th></th>
@@ -20,6 +21,20 @@
         <tbody>
           <tr v-for="item of items" :key="item.id">
             <td>{{ item.id }}</td>
+            <td>
+              <img
+                class=""
+                v-if="item.img"
+                :src="
+                  item.img
+                    ? 'http://localhost:3210/api/v1/files/download/1/' +
+                      item.img
+                    : '/burger.png'
+                "
+                height="30px"
+                width="30px"
+              />
+            </td>
             <td>{{ item.name }}</td>
             <td>
               <button class="btn-small btn" @click="openModal(item)">
@@ -58,25 +73,24 @@ export default {
     modalItem: null,
     group: {
       id: null,
-      name: null,
+      name: null
     }
   }),
   methods: {
-
     async del(group) {
-      group.action = "DELETE"
+      group.action = "DELETE";
       const ok = await this.$store.dispatch("saveGroup", group);
       if (ok) {
         this.items = await this.$store.dispatch("getAllGroups", {});
-        return
+        return;
       }
-      return ok
+      return ok;
     },
     async openModal(i) {
       if (!i) {
         this.group = {
           id: null,
-          name: null,
+          name: null
         };
       } else {
         this.group = i;

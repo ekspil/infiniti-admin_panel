@@ -8,18 +8,18 @@
             <td>
               <div>
                 <label>
-                  <input type="checkbox" v-model="archive"/>
+                  <input type="checkbox" v-model="archive" />
                   <span>Показывать архивные записи</span>
                 </label>
               </div>
             </td>
             <td>
               <div class="input-field">
-                <select ref="selectcorner" v-model="selectedCorner">
+                <select ref="selectkiosk" v-model="selectedKiosk">
                   <option value="ALL" selected>Все</option>
                   <option :value="null" selected>Без корнера</option>
                   <option
-                    v-for="item of corners"
+                    v-for="item of kiosks"
                     :key="item.id"
                     :value="item.name"
                     >{{ item.name }}</option
@@ -40,7 +40,7 @@
       :groups="groups"
       :product="product"
       :mods="mods"
-      :corners="corners"
+      :kiosks="kiosks"
     />
 
     <section v-if="products && groups">
@@ -48,10 +48,11 @@
         <thead>
           <tr>
             <th>#</th>
+            <th></th>
             <th>Наименование</th>
             <th>Цена</th>
             <th>Общий код</th>
-            <th>Корнер</th>
+            <th>Киоск</th>
             <th>Станция</th>
             <th>Группа</th>
             <th>Открыть</th>
@@ -60,12 +61,30 @@
         </thead>
 
         <tbody>
-          <tr v-for="item of filtredProducts" :key="item.id" :class="{'transperent': item.archive}">
+          <tr
+            v-for="item of filtredProducts"
+            :key="item.id"
+            :class="{ transperent: item.archive }"
+          >
             <td>{{ item.id }}</td>
+            <td>
+              <img
+                class=""
+                v-if="item.img"
+                :src="
+                  item.img
+                    ? 'http://localhost:3210/api/v1/files/download/1/' +
+                      item.img
+                    : '/burger.png'
+                "
+                height="30px"
+                width="30px"
+              />
+            </td>
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.code }}</td>
-            <td>{{ item.corner }}</td>
+            <td>{{ item.kiosk }}</td>
             <td>
               <span class="white-text badge red">{{ item.station }}</span>
             </td>
@@ -103,8 +122,8 @@ export default {
     ModalProduct
   },
   data: () => ({
-    corners: null,
-    selectedCorner: "ALL",
+    kiosks: null,
+    selectedKiosk: "ALL",
     products: null,
     modalProduct: null,
     isOpen: false,
@@ -118,24 +137,27 @@ export default {
       items: [],
       station: 1,
       code: null,
-      corner: "ALL",
+      kiosk: "ALL",
       price: null,
       mods: [],
-      archive: null
+      archive: null,
+      img: null
     }
   }),
   watch: {
     async archive(nValue) {
-      this.products = await this.$store.dispatch("getAllProducts", {archive: nValue});
+      this.products = await this.$store.dispatch("getAllProducts", {
+        archive: nValue
+      });
     }
   },
   computed: {
     filtredProducts() {
       if (!this.products) return null;
-      if (this.selectedCorner === "ALL") return this.products;
+      if (this.selectedKiosk === "ALL") return this.products;
 
       return this.products.filter(
-        product => product.corner === this.selectedCorner
+        product => product.kiosk === this.selectedKiosk
       );
     }
   },
@@ -162,7 +184,7 @@ export default {
           items: [],
           station: 1,
           code: null,
-          corner: "ALL",
+          kiosk: "ALL",
           price: null,
           archive: null,
           mods: []
@@ -191,11 +213,13 @@ export default {
     this.items = await this.$store.dispatch("getAllItems", {});
   },
   async mounted() {
-    this.products = await this.$store.dispatch("getAllProducts", {archive: this.archive});
-    this.corners = await this.$store.dispatch("getAllCorners", {});
+    this.products = await this.$store.dispatch("getAllProducts", {
+      archive: this.archive
+    });
+    this.kiosks = await this.$store.dispatch("getAllKiosks", {});
     this.groups = await this.$store.dispatch("getAllGroups", {});
     this.mods = await this.$store.dispatch("getAllMods", {});
-    this.select3 = window.M.FormSelect.init(this.$refs.selectcorner);
+    this.select3 = window.M.FormSelect.init(this.$refs.selectkiosk);
     window.M.updateTextFields();
   }
 };

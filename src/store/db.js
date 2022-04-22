@@ -69,10 +69,10 @@ export default {
         throw e;
       }
     },
-    async getAllCorners({ dispatch, commit }, { password }) {
+    async getAllKiosks({ dispatch, commit }, { password }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/terminal/corners/get"
+          "http://" + host + ":3000/api/terminal/kiosks/get"
         );
         return result.data;
       } catch (e) {
@@ -103,10 +103,10 @@ export default {
         return false;
       }
     },
-    async saveCorner(store, data) {
+    async saveKiosk(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/corners/save",
+          "http://" + host + ":3000/api/terminal/kiosks/save",
           data
         );
         return true;
@@ -181,6 +181,17 @@ export default {
           "http://" + host + ":3000/api/terminal/smena/get"
         );
         return smena.data;
+      } catch (e) {
+        console.log(e);
+        return false;
+      }
+    },
+    async commandKiosk(store, {item, command}) {
+      try {
+        const result = await axios.get(
+          `http://${host}:3000/api/terminal/kiosks/set/${item.name}/${command}`
+        );
+        return result;
       } catch (e) {
         console.log(e);
         return false;

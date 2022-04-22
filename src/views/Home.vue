@@ -9,19 +9,19 @@
     </div>
 
     <div class="row">
-      <div class="col s12 m6 l4">
-        <div class="card light-blue bill-card">
-          <div class="card-content white-text">
-            <span class="card-title">План по ТО</span>
+<!--      <div class="col s12 m6 l4">-->
+<!--        <div class="card light-blue bill-card">-->
+<!--          <div class="card-content white-text">-->
+<!--            <span class="card-title">План по ТО</span>-->
 
-            <p class="currency-line">
-              <span>{{smena.plan}}</span>
-            </p>
-          </div>
-        </div>
-      </div>
+<!--            <p class="currency-line">-->
+<!--              <span>{{smena.plan}}</span>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="col s12 m6 l8">
+      <div class="col s12 m6 l12" v-if="kiosks">
         <div class="card orange darken-3 bill-card">
           <div class="card-content white-text">
             <div class="card-header">
@@ -30,15 +30,15 @@
             <table>
               <thead>
                 <tr>
-                  <th>Ресторан</th>
+                  <th>Киоск</th>
                   <th>Чеков</th>
                   <th>Товарооборот</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td>РБ0</td>
+                <tr v-for="kiosk of kiosks" :key="kiosk.id">
+                  <td>{{ kiosk.name }}</td>
                   <td> 0 чеков</td>
                   <td> 0 руб</td>
                 </tr>
@@ -70,12 +70,17 @@ export default {
       plan: null,
       pin: "1234321"
     },
+    kiosks: null,
     modalSmena: null,
   }),
   async mounted() {
     const smena = await this.$store.dispatch("getLastSmena" );
+    const kiosks = await this.$store.dispatch("getAllKiosks", {} );
     if (smena){
       this.smena = smena
+    }
+    if (kiosks){
+      this.kiosks = kiosks
     }
   },
   methods: {

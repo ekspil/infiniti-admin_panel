@@ -6,12 +6,36 @@
   >
     <div class="card-content">
       <span class="card-title">Товар</span>
+      <span
+        ><img
+          class=""
+          v-if="product.img"
+          :src="
+            product.img
+              ? 'http://localhost:3210/api/v1/files/download/1/' + product.img
+              : '/burger.png'
+          "
+          height="50px"
+          width="50px"
+        /> </span
+      ><br />
       <div class="input-field">
         <input id="pname" type="text" v-model.trim="product.name" />
         <label for="pname">Наименование</label>
         <small v-if="false" class="helper-text invalid"
           >Должно быть заполнено</small
         >
+      </div>
+      <div class="input-field">
+        <input
+          class=""
+          type="file"
+          id="fileImg"
+          ref="fileImg"
+          for="pname"
+          v-on:change="handleFileUpload('fileImg')"
+        />
+        <label for="pname"></label>
       </div>
       <div class="input-field">
         <input type="text" v-model.trim="product.code" />
@@ -28,13 +52,13 @@
         >
       </div>
       <div class="input-field">
-        <select ref="selectcorner" v-model="product.corner">
-          <option :value="null" selected>Без корнера</option>
-          <option v-for="item of corners" :key="item.id" :value="item.name">{{
-              item.uid
-            }}</option>
+        <select ref="selectkiosk" v-model="product.kiosk">
+          <option :value="null" selected>Без киоска</option>
+          <option v-for="item of kiosks" :key="item.id" :value="item.name">{{
+            item.uid
+          }}</option>
         </select>
-        <label>Выберете корнер</label>
+        <label>Выберете киоск</label>
       </div>
       <div class="input-field">
         <input
@@ -47,15 +71,6 @@
         <small v-if="false" class="helper-text invalid"
           >Должно быть заполнено</small
         >
-      </div>
-      <div class="input-field">
-        <select ref="selectprod" multiple v-model="product.items">
-          <option value="" disabled selected>Выберете нужные</option>
-          <option v-for="item of items" :key="item.id" :value="item.id">{{
-            item.name
-          }}</option>
-        </select>
-        <label>Добавить заготовку</label>
       </div>
 
       <div class="input-field">
@@ -72,7 +87,7 @@
         <select ref="selectset" multiple v-model="product.mods">
           <option value="" disabled selected>Выберете состав сэта</option>
           <option v-for="item of mods" :key="item.id" :value="item.id">{{
-              item.name
+            item.name
           }}</option>
         </select>
         <label>Состав сета</label>
@@ -90,22 +105,45 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "ModalP",
-  props: ["items", "product", "groups", "mods", "corners"],
+  props: ["items", "product", "groups", "mods", "kiosks"],
   data: () => ({
     modal: {},
     select: null,
     select2: null,
     select3: null,
-    select4: null,
+    select4: null
   }),
   methods: {
+    async handleFileUpload(fileName) {
+      this.file = this.$refs[fileName].files[0];
+      let formData = new FormData();
+      formData.append("file", this.file);
+      try {
+        await axios.post(
+          `http://localhost:3210/api/v1/files/upload/1/${this.file.name}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              authorization: "Bearer " + "1111111111"
+            }
+          }
+        );
+        this[fileName] = `${this.file.name}`;
+        this.product.img = `${this.file.name}`;
+      } catch (e) {
+        console.log(e);
+        alert("Ошибка загрузки");
+      }
+    },
     close() {
       this.$emit("close");
     },
-    getMod(id){
-      return this.mods.find(i => i.id === id)
+    getMod(id) {
+      return this.mods.find(i => i.id === id);
     },
     async save() {
       const ok = await this.$store.dispatch("saveProduct", this.product);
@@ -120,7 +158,7 @@ export default {
     this.select = window.M.FormSelect.init(this.$refs.selectprod);
     this.select2 = window.M.FormSelect.init(this.$refs.selectgroup);
     this.select3 = window.M.FormSelect.init(this.$refs.selectset);
-    this.select4 = window.M.FormSelect.init(this.$refs.selectcorner);
+    this.select4 = window.M.FormSelect.init(this.$refs.selectkiosk);
     window.M.updateTextFields();
   }
 };
