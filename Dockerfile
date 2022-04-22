@@ -1,4 +1,4 @@
-FROM node:11 as builder
+FROM node:12 as builder
 ARG VUE_APP_GRAPHQL_API=http://api.rb24.ru
 RUN mkdir -p /src/src
 COPY public /src/public
