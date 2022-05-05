@@ -17,7 +17,7 @@
               <div class="input-field">
                 <select ref="selectkiosk" v-model="selectedKiosk">
                   <option value="ALL" selected>Все</option>
-                  <option :value="null" selected>Без корнера</option>
+                  <option :value="null" selected>Без киоска</option>
                   <option
                     v-for="item of kiosks"
                     :key="item.id"

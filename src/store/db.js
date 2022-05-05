@@ -1,5 +1,5 @@
 import axios from "axios";
-const host = document.location.host.split(":")[0];
+const host = "api.rb24.ru"
 
 export default {
   state: {
@@ -23,7 +23,7 @@ export default {
     async getAllUsers({ dispatch, commit }, { password }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/terminal/users/get"
+          "https://" + host + "/api/terminal/users/get"
         );
         commit("setItems", result.data);
         return result.data;
@@ -35,7 +35,7 @@ export default {
     async getAllItems({ dispatch, commit }, { password }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/terminal/items/get"
+          "https://" + host + "/api/terminal/items/get"
         );
         return result.data;
       } catch (e) {
@@ -46,7 +46,7 @@ export default {
     async getAllGroups({ dispatch, commit }, { password }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/terminal/groups/get"
+          "https://" + host + "/api/terminal/groups/get"
         );
         return result.data;
       } catch (e) {
@@ -56,7 +56,7 @@ export default {
     },
     async getAllProducts({ dispatch, commit }, { password , archive}) {
       try {
-        let url = "http://" + host + ":3000/api/terminal/products/get"
+        let url = "https://" + host + "/api/terminal/products/get"
         if(archive) {
           url = url + "?archive=1"
         }
@@ -72,7 +72,7 @@ export default {
     async getAllKiosks({ dispatch, commit }, { password }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/terminal/kiosks/get"
+          "https://" + host + "/api/terminal/kiosks/get"
         );
         return result.data;
       } catch (e) {
@@ -83,7 +83,7 @@ export default {
     async getAllMods({ dispatch, commit }, { password }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/terminal/mods/get"
+          "https://" + host + "/api/terminal/mods/get"
         );
         return result.data;
       } catch (e) {
@@ -94,7 +94,7 @@ export default {
     async saveProduct(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/products/save",
+          "https://" + host + "/api/terminal/products/save",
           data
         );
         return true;
@@ -106,7 +106,7 @@ export default {
     async saveKiosk(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/kiosks/save",
+          "https://" + host + "/api/terminal/kiosks/save",
           data
         );
         return true;
@@ -118,7 +118,7 @@ export default {
     async saveGroup(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/groups/save",
+          "https://" + host + "/api/terminal/groups/save",
           data
         );
         return true;
@@ -130,7 +130,7 @@ export default {
     async saveItem(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/items/save",
+          "https://" + host + "/api/terminal/items/save",
           data
         );
         return true;
@@ -142,7 +142,7 @@ export default {
     async saveMod(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/mods/save",
+          "https://" + host + "/api/terminal/mods/save",
           data
         );
         return true;
@@ -154,7 +154,7 @@ export default {
     async saveUser(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/users/save",
+          "https://" + host + "/api/terminal/users/save",
           data
         );
         return true;
@@ -166,7 +166,7 @@ export default {
     async saveSmena(store, data) {
       try {
         await axios.post(
-          "http://" + host + ":3000/api/terminal/smena/save",
+          "https://" + host + "/api/terminal/smena/save",
           data
         );
         return true;
@@ -178,7 +178,7 @@ export default {
     async getLastSmena() {
       try {
         const smena = await axios.get(
-          "http://" + host + ":3000/api/terminal/smena/get"
+          "https://" + host + "/api/terminal/smena/get"
         );
         return smena.data;
       } catch (e) {
@@ -189,7 +189,7 @@ export default {
     async commandKiosk(store, {item, command}) {
       try {
         const result = await axios.get(
-          `http://${host}:3000/api/terminal/kiosks/set/${item.name}/${command}`
+          `https://${host}/api/terminal/kiosks/set/${item.name}/${command}`
         );
         return result;
       } catch (e) {

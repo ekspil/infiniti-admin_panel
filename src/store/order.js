@@ -1,5 +1,5 @@
 import axios from "axios";
-const host = document.location.host.split(':')[0]
+const host = "api.rb24.ru"
 
 export default {
   state: {
@@ -7,7 +7,7 @@ export default {
   actions: {
     async getOrders({ dispatch, commit }) {
       try {
-        const result = await axios.get("http://"+host+":3000/api/terminal/order/all");
+        const result = await axios.get("https://"+host+"/api/terminal/order/all");
         return result.data
       } catch (e) {
         console.log(dispatch, commit);
@@ -16,7 +16,7 @@ export default {
     },
     async updateOrder({ dispatch, commit }, data) {
       try {
-        const result = await axios.post("http://"+host+":3000/api/terminal/order/change", data);
+        const result = await axios.post("https://"+host+"/api/terminal/order/change", data);
         return result.data
       } catch (e) {
         console.log(dispatch, commit);
@@ -25,7 +25,7 @@ export default {
     },
     async sendStatus({ dispatch, commit }, data) {
       try {
-        const result = await axios.post("http://"+host+":3000/api/terminal/order/sendStatus", data);
+        const result = await axios.post("https://"+host+"/api/terminal/order/sendStatus", data);
         console.log(result.data)
         return result.data
       } catch (e) {
@@ -35,7 +35,7 @@ export default {
     },
     async updateOrderHidden({ dispatch, commit }, data) {
       try {
-        const result = await axios.post("http://"+host+":3000/api/terminal/order/changeHidden", data);
+        const result = await axios.post("https://"+host+"/api/terminal/order/changeHidden", data);
         return result.data
       } catch (e) {
         console.log(dispatch, commit);
@@ -44,7 +44,7 @@ export default {
     },
     async setReadyItem({ dispatch, commit }, data) {
       try {
-        const result = await axios.post("http://"+host+":3000/api/terminal/order/setReadyItem", data);
+        const result = await axios.post("https://"+host+"/api/terminal/order/setReadyItem", data);
         return result.data
       } catch (e) {
         console.log(dispatch, commit);
@@ -53,7 +53,7 @@ export default {
     },
     async setOrderScreen({ dispatch, commit }, data) {
       try {
-        const result = await axios.post("http://"+host+":3000/api/terminal/order/setOrderScreen", data);
+        const result = await axios.post("https://"+host+"/api/terminal/order/setOrderScreen", data);
         return result.data
       } catch (e) {
         console.log(dispatch, commit);
@@ -62,7 +62,7 @@ export default {
     },
     async setDieItem({ dispatch, commit }, data) {
       try {
-        const result = await axios.post("http://"+host+":3000/api/terminal/order/setDieItem", data);
+        const result = await axios.post("https://"+host+"/api/terminal/order/setDieItem", data);
         return result.data
       } catch (e) {
         console.log(dispatch, commit);
@@ -71,7 +71,7 @@ export default {
     },
     async getItems({ dispatch, commit }) {
       try {
-        const result = await axios.get("http://"+host+":3000/api/terminal/order/allItems");
+        const result = await axios.get("https://"+host+"/api/terminal/order/allItems");
         return result.data
       } catch (e) {
         console.log(dispatch, commit);

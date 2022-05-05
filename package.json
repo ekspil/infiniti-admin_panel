@@ -1,6 +1,6 @@
 {
-  "name": "terminal_eda_front",
-  "version": "1.0.0",
+  "name": "Kiosk manager panel",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

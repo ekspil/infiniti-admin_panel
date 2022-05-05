@@ -1,5 +1,5 @@
 import axios from "axios";
-const host = document.location.host.split(":")[0];
+const host = "api.rb24.ru"
 
 export default {
   state: {},
@@ -7,7 +7,7 @@ export default {
     async findOrderKassa({ dispatch, commit }, number) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/kassa/getOrder/" + number
+          "https://" + host + "/api/kassa/getOrder/" + number
         );
         return result.data;
       } catch (e) {
@@ -18,7 +18,7 @@ export default {
     async getImgs({ dispatch, commit }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/eo/getImgs"
+          "https://" + host + "/api/eo/getImgs"
         );
         return result.data;
       } catch (e) {
@@ -29,7 +29,7 @@ export default {
     async newOrderKassa({ dispatch, commit }) {
       try {
         const result = await axios.get(
-          "http://" + host + ":3000/api/kassa/create"
+          "https://" + host + "/api/kassa/create"
         );
         return result.data;
       } catch (e) {
@@ -40,7 +40,7 @@ export default {
     async updateOrderKassa({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/updateOrder/" + body.route + "?printer=" + body.printer,
+          "https://" + host + "/api/kassa/updateOrder/" + body.route + "?printer=" + body.printer,
           body
         );
         return result.data;
@@ -52,7 +52,7 @@ export default {
     async printFiscal({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/printFiscal/",
+          "https://" + host + "/api/kassa/printFiscal/",
           body
         );
         return result.data;
@@ -64,7 +64,7 @@ export default {
     async payTerminal({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/payTerminal/",
+          "https://" + host + "/api/kassa/payTerminal/",
           body
         );
         return result.data;
@@ -76,7 +76,7 @@ export default {
     async setPayed({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/setPayed/",
+          "https://" + host + "/api/kassa/setPayed/",
           body
         );
         return result.data;
@@ -88,7 +88,7 @@ export default {
     async setCanceled({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/setCanceled/",
+          "https://" + host + "/api/kassa/setCanceled/",
           body
         );
         return result.data;
@@ -100,7 +100,7 @@ export default {
     async zReport({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/zReport/",
+          "https://" + host + "/api/kassa/zReport/",
           body
         );
         return result.data;
@@ -112,7 +112,7 @@ export default {
     async returnChekPayment({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/returnChekPayment/",
+          "https://" + host + "/api/kassa/returnChekPayment/",
           body
         );
         console.log(result.data)
@@ -125,7 +125,7 @@ export default {
     async xReport({ dispatch, commit }, body) {
       try {
         const result = await axios.post(
-          "http://" + host + ":3000/api/kassa/xReport/",
+          "https://" + host + "/api/kassa/xReport/",
           body
         );
         return result.data;
