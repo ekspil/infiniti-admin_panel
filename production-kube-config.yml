@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: kiosk-admin
-        image: cr.yandex/crpbchff05ai3nceeln1/kiosk-admin:1.0.1
+        image: cr.yandex/crpbchff05ai3nceeln1/kiosk-admin:1.0.2
         imagePullPolicy: Always
         ports:
           - containerPort: 80

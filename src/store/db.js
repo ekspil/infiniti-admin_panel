@@ -91,6 +91,17 @@ export default {
         throw e;
       }
     },
+    async getAllHelpers({ dispatch, commit }, { password }) {
+      try {
+        const result = await axios.get(
+          "https://" + host + "/api/kiosk/helpers/get"
+        );
+        return result.data;
+      } catch (e) {
+        console.log(dispatch, commit, password);
+        throw e;
+      }
+    },
     async saveProduct(store, data) {
       try {
         await axios.post(
@@ -143,6 +154,18 @@ export default {
       try {
         await axios.post(
           "https://" + host + "/api/terminal/mods/save",
+          data
+        );
+        return true;
+      } catch (e) {
+        console.log(e);
+        return false;
+      }
+    },
+    async saveHelper(store, data) {
+      try {
+        await axios.post(
+          "https://" + host + "/api/kiosk/helpers/save",
           data
         );
         return true;

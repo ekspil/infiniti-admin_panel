@@ -25,6 +25,7 @@ export default {
       { title: "Группы товаров", url: "/groups" },
       { title: "Товары", url: "/Products" },
       { title: "Модификаторы", url: "/Mods" },
+      { title: "Подсказки", url: "/Helpers" },
       //{ title: "Заготовки", url: "/Items" },
       { title: "Пользователи", url: "/Users" },
       //{ title: "Рабочий стол", url: "/tabAdm" },

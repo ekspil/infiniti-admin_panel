@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="login">
     <div class="card-content">
-      <span class="card-title">RB Managment Console</span>
+      <span class="card-title">RB Management Console</span>
       <div class="input-field">
         <input
           id="email"

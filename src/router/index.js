@@ -55,6 +55,13 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Mods.vue")
   },
   {
+    path: "/helpers",
+    name: "Helpers",
+    meta: { layout: "main" },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Helpers.vue")
+  },
+  {
     path: "/users",
     name: "Users",
     meta: { layout: "main" },
