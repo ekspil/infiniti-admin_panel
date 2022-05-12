@@ -5,9 +5,10 @@
     </div>
 
     <ModalHelper
-      v-if="products && helpers && isOpen"
+      v-if="products && helpers && groups && isOpen"
       @close="refresh()"
       :products="products"
+      :groups="groups"
       :helper="helper"
     />
 
@@ -64,6 +65,7 @@ export default {
     modalHelper: null,
     isOpen: false,
     products: null,
+    groups: null,
     helper: {
       id: null,
       name: null,
@@ -73,18 +75,16 @@ export default {
   }),
 
   methods: {
-
     async del(item) {
-      item.action = "DELETE"
+      item.action = "DELETE";
       const ok = await this.$store.dispatch("saveHelper", item);
       if (ok) {
         this.helpers = await this.$store.dispatch("getAllHelpers", {});
-        return
+        return;
       }
-      return ok
+      return ok;
     },
     async openModal(p) {
-
       if (!p) {
         this.helper = {
           id: null,
@@ -116,6 +116,7 @@ export default {
   },
   async beforeMount() {
     this.products = await this.$store.dispatch("getAllProducts", {});
+    this.groups = await this.$store.dispatch("getAllGroups", {});
   },
   async mounted() {
     this.helpers = await this.$store.dispatch("getAllHelpers", {});

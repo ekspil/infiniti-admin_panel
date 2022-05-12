@@ -22,13 +22,13 @@
         >
       </div>
 
-<!--      <div class="input-field">-->
-<!--        <input type="text" v-model.trim="helper.price" />-->
-<!--        <label for="pname">Цена</label>-->
-<!--        <small v-if="false" class="helper-text invalid"-->
-<!--          >Должно быть заполнено</small-->
-<!--        >-->
-<!--      </div>-->
+      <!--      <div class="input-field">-->
+      <!--        <input type="text" v-model.trim="helper.price" />-->
+      <!--        <label for="pname">Цена</label>-->
+      <!--        <small v-if="false" class="helper-text invalid"-->
+      <!--          >Должно быть заполнено</small-->
+      <!--        >-->
+      <!--      </div>-->
       <div class="input-field">
         <select ref="selectprod" multiple v-model="helper.items">
           <option value="" disabled selected>Выберете нужные</option>
@@ -36,18 +36,17 @@
             item.name
           }}</option>
         </select>
-        <label>Показывать для</label>
+        <label>Состав подсказки</label>
       </div>
       <div class="input-field">
         <select ref="selectprode" multiple v-model="helper.exclude">
           <option value="" disabled selected>Выберете нужные</option>
-          <option v-for="item of products" :key="item.id" :value="item.id">{{
+          <option v-for="item of groups" :key="item.id" :value="item.id">{{
             item.name
           }}</option>
         </select>
-        <label>Не показывать если выбран</label>
+        <label>Не показывать если выбраны товары из группы</label>
       </div>
-
     </div>
     <div class="card-action">
       <div>
@@ -63,7 +62,7 @@
 <script>
 export default {
   name: "ModalHelper",
-  props: ["products", "helper"],
+  props: ["products", "helper", "groups"],
   data: () => ({
     modal: {},
     select: null,
@@ -74,7 +73,7 @@ export default {
       this.$emit("close");
     },
     async save() {
-      this.helper.priority = Number(this.helper.priority )
+      this.helper.priority = Number(this.helper.priority);
       const ok = await this.$store.dispatch("saveHelper", this.helper);
       if (ok) {
         this.close();
