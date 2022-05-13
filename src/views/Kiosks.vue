@@ -43,7 +43,7 @@
               </button>
             </td>
             <td>
-              <button class="btn-small btn" @click="openModal(us)">
+              <button class="btn-small btn" @click="command(us, 'settlement')">
                 <i class="material-icons">request_quote</i>
               </button>
             </td>
