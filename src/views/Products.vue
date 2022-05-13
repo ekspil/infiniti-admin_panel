@@ -52,7 +52,7 @@
             <th>Наименование</th>
             <th>Цена</th>
             <th>Общий код</th>
-            <th>Киоск</th>
+            <th>Купон</th>
             <th>Станция</th>
             <th>Группа</th>
             <th>Открыть</th>
@@ -73,8 +73,7 @@
                 v-if="item.img"
                 :src="
                   item.img
-                    ? 'https://api.rb24.ru/api/v1/files/download/1/' +
-                      item.img
+                    ? 'https://api.rb24.ru/api/v1/files/download/1/' + item.img
                     : '/burger.png'
                 "
                 height="30px"
@@ -84,7 +83,7 @@
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.code }}</td>
-            <td>{{ item.kiosk }}</td>
+            <td>{{ item.coupon }}</td>
             <td>
               <span class="white-text badge red">{{ item.station }}</span>
             </td>
@@ -141,7 +140,11 @@ export default {
       price: null,
       mods: [],
       archive: null,
-      img: null
+      img: null,
+      coupon: null,
+      couponPrice: 9999,
+      hidden: false,
+      priority: 0
     }
   }),
   watch: {
@@ -187,7 +190,12 @@ export default {
           kiosk: "ALL",
           price: null,
           archive: null,
-          mods: []
+          mods: [],
+          img: null,
+          coupon: null,
+          couponPrice: 9999,
+          hidden: false,
+          priority: 0
         };
       } else {
         this.product = JSON.parse(JSON.stringify(p));
