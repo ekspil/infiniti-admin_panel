@@ -12,9 +12,21 @@
                   <span>Показывать архивные записи</span>
                 </label>
               </div>
+            </td><td>
+            <div class="input-field">
+              <select ref="selectgroup" v-model="selectedGroup">
+                <option :value="null" key="nulnul" selected>Все</option>
+                <option
+                    v-for="item of groups"
+                    :key="item.id"
+                    :value="item.id"
+                >{{ item.name }}</option
+                >
+              </select>
+            </div>
             </td>
             <td>
-              <div class="input-field">
+              <div class="input-field" v-if="false">
                 <select ref="selectkiosk" v-model="selectedKiosk">
                   <option value="ALL" selected>Все</option>
                   <option :value="null" selected>Без киоска</option>
@@ -121,6 +133,7 @@ export default {
     ModalProduct
   },
   data: () => ({
+    selectedGroup: null,
     kiosks: null,
     selectedKiosk: "ALL",
     products: null,
@@ -157,11 +170,20 @@ export default {
   computed: {
     filtredProducts() {
       if (!this.products) return null;
-      if (this.selectedKiosk === "ALL") return this.products;
+      if (this.selectedKiosk === "ALL" && this.selectedGroup === null) return this.products
+      let p = this.products
+      if(this.selectedKiosk !== "ALL"){
+        p = this.products.filter(
+            product => product.kiosk === this.selectedKiosk
+        );
+      }
+      if(this.selectedGroup !== null){
+        p = this.products.filter(
+            product => product.group_id === this.selectedGroup
+        );
+      }
+      return p
 
-      return this.products.filter(
-        product => product.kiosk === this.selectedKiosk
-      );
     }
   },
   methods: {
@@ -228,6 +250,7 @@ export default {
     this.groups = await this.$store.dispatch("getAllGroups", {});
     this.mods = await this.$store.dispatch("getAllMods", {});
     this.select3 = window.M.FormSelect.init(this.$refs.selectkiosk);
+    this.select4 = window.M.FormSelect.init(this.$refs.selectgroup);
     window.M.updateTextFields();
   }
 };
