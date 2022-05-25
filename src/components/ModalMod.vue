@@ -6,6 +6,9 @@
   >
     <div class="card-content">
       <span class="card-title">Модификатор</span>
+      <table>
+        <tr>
+          <td>
       <div class="input-field">
         <input id="pname" type="text" v-model.trim="mod.name" />
         <label for="pname">Наименование</label>
@@ -13,14 +16,10 @@
           >Должно быть заполнено</small
         >
       </div>
-
-<!--      <div class="input-field">-->
-<!--        <input type="text" v-model.trim="mod.price" />-->
-<!--        <label for="pname">Цена</label>-->
-<!--        <small v-if="false" class="helper-text invalid"-->
-<!--          >Должно быть заполнено</small-->
-<!--        >-->
-<!--      </div>-->
+          </td>
+        </tr>
+        <tr>
+          <td>
       <div class="input-field">
         <select ref="selectprod" multiple v-model="mod.items">
           <option value="" disabled selected>Выберете нужные</option>
@@ -31,6 +30,24 @@
         <label>Добавить модификатор</label>
       </div>
 
+          </td>
+        </tr>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <tr>
+          <td>
+
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="card-action">
       <div>
@@ -38,6 +55,8 @@
           Сохранить
           <i class="material-icons right">send</i>
         </button>
+
+
       </div>
     </div>
   </form>
