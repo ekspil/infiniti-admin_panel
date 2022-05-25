@@ -17,7 +17,8 @@
             <th>Пер</th>
             <th>L-O</th>
             <th>Z</th>
-            <th>Редактировать</th>
+            <th>Del</th>
+            <th>Edit</th>
             <th></th>
           </tr>
         </thead>
@@ -45,6 +46,11 @@
             <td>
               <button class="btn-small btn" @click="command(us, 'settlement')">
                 <i class="material-icons">request_quote</i>
+              </button>
+            </td>
+            <td>
+              <button class="btn-small btn" @click="command(us, 'delete_bill')">
+                <i class="material-icons">close</i>
               </button>
             </td>
             <td>
