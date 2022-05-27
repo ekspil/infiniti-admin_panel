@@ -24,6 +24,11 @@
         <label for="catname">Наименование</label>
         <small v-if="false" class="helper-text invalid">Наименование</small>
       </div>
+      <div class="input-field">
+        <input id="catpriority" type="text" v-model="group.priority" />
+        <label for="catpriority">Приоритет</label>
+        <small v-if="false" class="helper-text invalid">Приоритет</small>
+      </div>
 
       <div class="input-field">
         <input
