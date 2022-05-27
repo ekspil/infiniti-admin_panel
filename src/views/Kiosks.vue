@@ -4,9 +4,9 @@
       <h3>Киоски</h3>
     </div>
 
-    <modalKiosks @close="refresh()" :kiosk="kiosk" v-if="isOpen" />
+    <modalKiosks @close="refresh()" :kiosk="kiosk" :products="products" v-if="isOpen" />
 
-    <section v-if="kiosks">
+    <section v-if="kiosks && products">
       <table>
         <thead>
           <tr>
@@ -87,12 +87,14 @@ export default {
     isOpen: false,
     modalKiosk: null,
     kiosks: null,
+    products: null,
     kiosk: {
       id: null,
       name: null,
       uid: null,
       key: null,
-      gate: null
+      gate: null,
+      stops: [],
     }
   }),
   methods: {
@@ -130,7 +132,8 @@ export default {
           id: null,
           name: null,
           uid: null,
-          gate: null
+          gate: null,
+          stops: []
         };
       } else {
         this.kiosk = i;
@@ -151,10 +154,14 @@ export default {
     async refresh() {
       this.modalKiosk.close();
       this.kiosks = await this.$store.dispatch("getAllKiosks", {});
+
     }
   },
   async mounted() {
     this.kiosks = await this.$store.dispatch("getAllKiosks", {});
+    this.products = await this.$store.dispatch("getAllProducts", {
+      archive: false
+    });
     window.M.updateTextFields();
   }
 };
