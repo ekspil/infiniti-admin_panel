@@ -39,8 +39,8 @@
               <tbody>
                 <tr v-for="kiosk of kiosks" :key="kiosk.id">
                   <td>{{ kiosk.name }}</td>
-                  <td> 0 чеков</td>
-                  <td> 0 руб</td>
+                  <td> {{ kiosk.billCount }} чеков</td>
+                  <td> {{ kiosk.billSum }} руб</td>
                 </tr>
               </tbody>
             </table>
@@ -75,7 +75,7 @@ export default {
   }),
   async mounted() {
     const smena = await this.$store.dispatch("getLastSmena" );
-    const kiosks = await this.$store.dispatch("getAllKiosks", {} );
+    const kiosks = await this.$store.dispatch("getAllKiosks", {report: true} );
     if (smena){
       this.smena = smena
     }

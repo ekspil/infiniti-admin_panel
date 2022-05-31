@@ -69,10 +69,13 @@ export default {
         throw e;
       }
     },
-    async getAllKiosks({ dispatch, commit }, { password }) {
+    async getAllKiosks({ dispatch, commit }, { password, report }) {
+      let add = ""
       try {
+        if(report) add = "?report=1"
         const result = await axios.get(
-          "https://" + host + "/api/terminal/kiosks/get"
+          //"https://" + host + "/api/terminal/kiosks/get" + add
+          "http://localhost/api/terminal/kiosks/get" + add
         );
         return result.data;
       } catch (e) {
