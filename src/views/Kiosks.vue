@@ -60,7 +60,7 @@
             </td>
 
             <td>
-              <button class="btn-small btn" @click="del(us)">
+              <button class="btn-small btn" @dblclick="del(us)">
                 <i class="material-icons">delete</i>
               </button>
             </td>
