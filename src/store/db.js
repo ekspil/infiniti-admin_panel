@@ -74,8 +74,8 @@ export default {
       try {
         if(report) add = "?report=1"
         const result = await axios.get(
-          //"https://" + host + "/api/terminal/kiosks/get" + add
-          "http://localhost/api/terminal/kiosks/get" + add
+          "https://" + host + "/api/terminal/kiosks/get" + add
+          //"http://localhost/api/terminal/kiosks/get" + add
         );
         return result.data;
       } catch (e) {
