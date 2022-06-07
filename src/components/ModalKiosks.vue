@@ -22,6 +22,18 @@
             </div>
           </td>
         </tr>
+        <tr>
+          <td>
+            <div id="kioskName333" class="input-field">
+              <select ref="kioskName333" v-model="kiosk.vip">
+                <option :value="false" selected>НЕТ</option>
+                <option :value="true">ДА</option>
+              </select>
+              <label for="name">VIP</label>
+              <small v-if="false" class="helper-text invalid">Name</small>
+            </div>
+          </td>
+        </tr>
 
         <tr>
           <td>
@@ -148,6 +160,7 @@ export default {
   },
   async mounted() {
     this.select = window.M.FormSelect.init(this.$refs.selectprodkiosk);
+    this.select2 = window.M.FormSelect.init(this.$refs.kioskName333);
 
     window.M.updateTextFields();
   }
@@ -155,7 +168,6 @@ export default {
 </script>
 
 <style scoped>
-
 .style {
   width: 500px;
 }
@@ -169,9 +181,7 @@ td {
   width: 350px;
 }
 
-
 .input-field {
   margin-bottom: 0 !important;
 }
-
 </style>

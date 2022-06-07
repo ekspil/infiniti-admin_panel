@@ -108,7 +108,8 @@ export default {
       key: null,
       gate: null,
       stops: [],
-      kiosks: []
+      kiosks: [],
+      vip: false
     }
   }),
   methods: {
@@ -147,7 +148,8 @@ export default {
           uid: null,
           gate: null,
           stops: [],
-          kiosks: []
+          kiosks: [],
+          vip: false
         };
       } else {
         this.kiosk = i;

@@ -118,6 +118,19 @@
         <tr>
           <td>
             <div class="input-field">
+              <input id="pnameV" type="text" v-model.trim="product.priceVip" />
+              <label for="pnameV">Цена VIP</label>
+              <small v-if="false" class="helper-text invalid"
+                >Должно быть заполнено</small
+              >
+            </div>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="input-field">
               <select ref="selectkiosk" v-model="product.kiosk">
                 <option :value="null" selected>Без киоска</option>
                 <option
