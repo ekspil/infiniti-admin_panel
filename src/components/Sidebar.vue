@@ -1,7 +1,7 @@
 <template>
   <ul class="sidenav app-sidenav" :class="{ open: navOpen }">
     <router-link
-      v-for="link in links"
+      v-for="link in computedLinks"
       tag="li"
       :key="link.url"
       active-class="active"
@@ -32,7 +32,19 @@ export default {
       //{ title: "Стол заготовок", url: "/tabAdmItems" },
       { title: "Экран гостя", url: "/admeo" }
     ]
-  })
+  }),
+  computed: {
+    computedLinks(){
+      if(this.$store.state.auth.user.role !== "ADMIN"){
+        return [
+          { title: "Смена", url: "/", exact: true },
+          { title: "Киоски", url: "/kiosks" },
+          { title: "Экран гостя", url: "/admeo" }
+        ]
+      }
+      return this.links
+    }
+  }
 };
 </script>
 

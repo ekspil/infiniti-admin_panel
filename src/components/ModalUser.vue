@@ -33,6 +33,20 @@
         </select>
         <label>Роль</label>
       </div>
+
+
+      <div class="input-field">
+        <select ref="selectkiosku" multiple v-model="user.kiosks">
+          <option
+              v-for="item of kiosks"
+              :key="item.id"
+              :value="item.id"
+          >{{ item.name }}</option
+          >
+        </select>
+        <label>Разрешенные киоски</label>
+      </div>
+
     </div>
     <div class="card-action">
       <div>
@@ -48,7 +62,7 @@
 <script>
 export default {
   name: "Modal",
-  props: ["user"],
+  props: ["user", "kiosks"],
   data: () => ({
     modal: {},
     interval: null
@@ -68,6 +82,7 @@ export default {
   },
   async mounted() {
     this.select = window.M.FormSelect.init(this.$refs.selectUserRole);
+    this.select2 = window.M.FormSelect.init(this.$refs.selectkiosku);
     window.M.updateTextFields();
   }
 };

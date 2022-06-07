@@ -4,7 +4,12 @@
       <h3>Киоски</h3>
     </div>
 
-    <modalKiosks @close="refresh()" :kiosk="kiosk" :products="products" v-if="isOpen" />
+    <modalKiosks
+      @close="refresh()"
+      :kiosk="kiosk"
+      :products="products"
+      v-if="isOpen"
+    />
 
     <section v-if="kiosks && products">
       <table>
@@ -29,7 +34,11 @@
             <td>{{ us.name }}</td>
             <td>{{ us.uid }}</td>
             <td>
-              <button class="btn-small btn" :class="{'red': us.lock}" @click="lock(us)">
+              <button
+                class="btn-small btn"
+                :class="{ red: us.lock }"
+                @click="lock(us)"
+              >
                 <i class="material-icons">lock</i>
               </button>
             </td>
@@ -60,7 +69,11 @@
             </td>
 
             <td>
-              <button class="btn-small btn" @dblclick="del(us)">
+              <button
+                class="btn-small btn"
+                @dblclick="del(us)"
+                :disabled="$store.state.auth.user.role !== 'ADMIN'"
+              >
                 <i class="material-icons">delete</i>
               </button>
             </td>
@@ -95,6 +108,7 @@ export default {
       key: null,
       gate: null,
       stops: [],
+      kiosks: []
     }
   }),
   methods: {
@@ -108,7 +122,7 @@ export default {
       return ok;
     },
     async lock(item) {
-      if(item.lock === null) item.lock = false
+      if (item.lock === null) item.lock = false;
       item.lock = !item.lock;
       const ok = await this.$store.dispatch("saveKiosk", item);
       if (ok) {
@@ -118,8 +132,7 @@ export default {
       return ok;
     },
     async command(item, command) {
-
-      const ok = await this.$store.dispatch("commandKiosk", {item, command});
+      const ok = await this.$store.dispatch("commandKiosk", { item, command });
       if (ok) {
         this.kiosks = await this.$store.dispatch("getAllKiosks", {});
         return;
@@ -133,7 +146,8 @@ export default {
           name: null,
           uid: null,
           gate: null,
-          stops: []
+          stops: [],
+          kiosks: []
         };
       } else {
         this.kiosk = i;
@@ -154,7 +168,6 @@ export default {
     async refresh() {
       this.modalKiosk.close();
       this.kiosks = await this.$store.dispatch("getAllKiosks", {});
-
     }
   },
   async mounted() {

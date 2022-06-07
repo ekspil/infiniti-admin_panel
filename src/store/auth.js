@@ -6,7 +6,8 @@ export default {
     user: {
       name: "NO USER",
       token: null,
-      id: null
+      id: null,
+      role: null
     }
   },
   mutations: {
@@ -14,11 +15,13 @@ export default {
       state.user.name = data.name;
       state.user.token = data.id;
       state.user.id = data.id;
+      state.user.role = data.role;
     },
     clearUserData(state) {
       state.user.name = "NO USER";
       state.user.token = null;
       state.user.id = null;
+      state.user.role = null;
     }
   },
 

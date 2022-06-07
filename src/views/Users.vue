@@ -5,9 +5,9 @@
     </div>
 
 
-    <ModalUsers @close="refresh()" :user="user" v-if="isOpen"/>
+    <ModalUsers @close="refresh()" :user="user" :kiosks="kiosks" v-if="isOpen && kiosks"/>
 
-    <section v-if="users">
+    <section v-if="users && kiosks">
       <table>
         <thead>
           <tr>
@@ -69,6 +69,7 @@ export default {
     isOpen: false,
     modalUser: null,
     users: null,
+    kiosks: null,
     user: {
       id: null,
       name: null,
@@ -120,6 +121,7 @@ export default {
   },
   async mounted() {
     this.users = await this.$store.dispatch("getAllUsers", {});
+    this.kiosks = await this.$store.dispatch("getAllKiosks", {});
     window.M.updateTextFields();
   }
 };

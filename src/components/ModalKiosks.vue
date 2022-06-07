@@ -15,6 +15,7 @@
                 type="text"
                 class="validate"
                 v-model="kiosk.name"
+                :disabled="$store.state.auth.user.role !== 'ADMIN'"
               />
               <label for="name">Имя</label>
               <small v-if="false" class="helper-text invalid">Name</small>
@@ -30,6 +31,7 @@
                 type="text"
                 class="validate"
                 v-model="kiosk.uid"
+                :disabled="$store.state.auth.user.role !== 'ADMIN'"
               />
               <label for="uid">Пользовательское название</label>
               <small v-if="false" class="helper-text invalid">User id</small>
@@ -37,7 +39,7 @@
           </td>
         </tr>
 
-        <tr>
+        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
           <td>
             <div class="input-field">
               <input
@@ -48,6 +50,48 @@
               />
               <label for="key">Key</label>
               <small v-if="false" class="helper-text invalid">Key</small>
+            </div>
+          </td>
+        </tr>
+
+        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
+          <td>
+            <div class="input-field">
+              <input
+                id="keyAtolU"
+                type="text"
+                class="validate"
+                v-model="kiosk.atolLogin"
+              />
+              <label for="key">Atol Login</label>
+            </div>
+          </td>
+        </tr>
+
+        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
+          <td>
+            <div class="input-field">
+              <input
+                id="keyAtolP"
+                type="text"
+                class="validate"
+                v-model="kiosk.atolPassword"
+              />
+              <label for="key">Atol Password</label>
+            </div>
+          </td>
+        </tr>
+
+        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
+          <td>
+            <div class="input-field">
+              <input
+                id="keyAtolG"
+                type="text"
+                class="validate"
+                v-model="kiosk.atolGroup"
+              />
+              <label for="key">Atol Group</label>
             </div>
           </td>
         </tr>
@@ -117,6 +161,17 @@ export default {
 }
 .modal-kiosk {
   overflow: visible;
+}
+
+td {
+  padding-bottom: 0;
+  padding-top: 0;
+  width: 350px;
+}
+
+
+.input-field {
+  margin-bottom: 0 !important;
 }
 
 </style>

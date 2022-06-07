@@ -1,5 +1,5 @@
 import axios from "axios";
-const host = "api.rb24.ru"
+const host = "api.rb24.ru";
 
 export default {
   state: {
@@ -54,32 +54,30 @@ export default {
         throw e;
       }
     },
-    async getAllProducts({ dispatch, commit }, { password , archive}) {
+    async getAllProducts({ dispatch, commit }, { password, archive }) {
       try {
-        let url = "https://" + host + "/api/terminal/products/get"
-        if(archive) {
-          url = url + "?archive=1"
+        let url = "https://" + host + "/api/terminal/products/get";
+        if (archive) {
+          url = url + "?archive=1";
         }
-        const result = await axios.get(
-          url
-        );
+        const result = await axios.get(url);
         return result.data;
       } catch (e) {
         console.log(dispatch, commit, password);
         throw e;
       }
     },
-    async getAllKiosks({ dispatch, commit }, { password, report }) {
-      let add = ""
+    async getAllKiosks(state, {password, report}) {
+      let add = "?userId=" + state.rootState.auth.user.id;
       try {
-        if(report) add = "?report=1"
+        if (report) add += "&report=1";
         const result = await axios.get(
           "https://" + host + "/api/terminal/kiosks/get" + add
           //"http://localhost/api/terminal/kiosks/get" + add
         );
         return result.data;
       } catch (e) {
-        console.log(dispatch, commit, password);
+        console.log(password);
         throw e;
       }
     },
@@ -119,10 +117,7 @@ export default {
     },
     async saveKiosk(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/terminal/kiosks/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/terminal/kiosks/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -131,10 +126,7 @@ export default {
     },
     async saveGroup(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/terminal/groups/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/terminal/groups/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -143,10 +135,7 @@ export default {
     },
     async saveItem(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/terminal/items/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/terminal/items/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -155,10 +144,7 @@ export default {
     },
     async saveMod(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/terminal/mods/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/terminal/mods/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -167,10 +153,7 @@ export default {
     },
     async saveHelper(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/kiosk/helpers/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/kiosk/helpers/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -179,10 +162,7 @@ export default {
     },
     async saveUser(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/terminal/users/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/terminal/users/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -191,10 +171,7 @@ export default {
     },
     async saveSmena(store, data) {
       try {
-        await axios.post(
-          "https://" + host + "/api/terminal/smena/save",
-          data
-        );
+        await axios.post("https://" + host + "/api/terminal/smena/save", data);
         return true;
       } catch (e) {
         console.log(e);
@@ -212,7 +189,7 @@ export default {
         return false;
       }
     },
-    async commandKiosk(store, {item, command}) {
+    async commandKiosk(store, { item, command }) {
       try {
         const result = await axios.get(
           `https://${host}/api/terminal/kiosks/set/${item.name}/${command}`
