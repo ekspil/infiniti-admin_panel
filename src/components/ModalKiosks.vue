@@ -21,8 +21,6 @@
               <small v-if="false" class="helper-text invalid">Name</small>
             </div>
           </td>
-        </tr>
-        <tr>
           <td>
             <div id="kioskName333" class="input-field">
               <select ref="kioskName333" v-model="kiosk.vip">
@@ -49,6 +47,19 @@
               <small v-if="false" class="helper-text invalid">User id</small>
             </div>
           </td>
+          <td>
+            <div class="input-field">
+              <input
+                id="inn"
+                type="text"
+                class="validate"
+                v-model="kiosk.atolInn"
+                :disabled="$store.state.auth.user.role !== 'ADMIN'"
+              />
+              <label for="uid">ИНН для Атол</label>
+              <small v-if="false" class="helper-text invalid">User id</small>
+            </div>
+          </td>
         </tr>
 
         <tr v-if="$store.state.auth.user.role === 'ADMIN'">
@@ -64,9 +75,6 @@
               <small v-if="false" class="helper-text invalid">Key</small>
             </div>
           </td>
-        </tr>
-
-        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
           <td>
             <div class="input-field">
               <input
@@ -92,9 +100,6 @@
               <label for="key">Atol Password</label>
             </div>
           </td>
-        </tr>
-
-        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
           <td>
             <div class="input-field">
               <input
@@ -109,7 +114,7 @@
         </tr>
 
         <tr>
-          <td>
+          <td colspan="2">
             <div class="input-field">
               <select ref="selectprodkiosk" multiple v-model="kiosk.stops">
                 <option value="" disabled selected>Выберете нужные</option>
@@ -169,7 +174,7 @@ export default {
 
 <style scoped>
 .style {
-  width: 500px;
+  width: 700px;
 }
 .modal-kiosk {
   overflow: visible;
