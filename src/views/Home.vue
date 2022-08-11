@@ -22,7 +22,7 @@
 <!--      </div>-->
 
       <div class="col s12 m6 l12" v-if="kiosks">
-        <div class="card orange darken-3 bill-card">
+        <div class="card orange darken-3 ">
           <div class="card-content white-text">
             <div class="card-header">
               <span class="card-title">Текущие показатели</span>
