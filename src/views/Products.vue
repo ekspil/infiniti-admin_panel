@@ -157,7 +157,8 @@ export default {
       coupon: null,
       couponPrice: 9999,
       hidden: false,
-      priority: 0
+      priority: 0,
+      codeIiko: null,
     }
   }),
   watch: {
@@ -217,7 +218,8 @@ export default {
           coupon: null,
           couponPrice: 9999,
           hidden: false,
-          priority: 0
+          priority: 0,
+          codeIiko: null
         };
       } else {
         this.product = JSON.parse(JSON.stringify(p));

@@ -126,6 +126,14 @@
             </div>
           </td>
           <td>
+
+            <div class="input-field">
+              <input id="codeIiko" type="text" v-model.trim="product.codeIiko" />
+              <label for="codeIiko">Код в базе IIKO</label>
+              <small v-if="false" class="helper-text invalid"
+              >Должно быть заполнено</small
+              >
+            </div>
           </td>
         </tr>
         <tr>

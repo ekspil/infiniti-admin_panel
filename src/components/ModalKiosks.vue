@@ -9,6 +9,17 @@
       <table>
         <tr>
           <td>
+            <div id="kioskType333" class="input-field">
+              <select ref="kioskType333" v-model="kiosk.type">
+                <option :value="`LOCAL`" selected>Локальная ЭО</option>
+                <option :value="`IIKO`">iiko cloud api</option>
+              </select>
+              <label for="kioskType333">Привязка к электронной очереди</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <div id="kioskName" class="input-field">
               <input
                 id="name"
@@ -113,6 +124,31 @@
           </td>
         </tr>
 
+        <tr v-if="$store.state.auth.user.role === 'ADMIN'">
+          <td>
+            <div class="input-field">
+              <input
+                id="iikoOrganizationId"
+                type="text"
+                class="validate"
+                v-model="kiosk.iikoOrganizationId"
+              />
+              <label for="iikoOrganizationId">Iiko Organozation ID</label>
+            </div>
+          </td>
+          <td>
+            <div class="input-field">
+              <input
+                id="iikoTerminalGroupId"
+                type="text"
+                class="validate"
+                v-model="kiosk.iikoTerminalGroupId"
+              />
+              <label for="iikoTerminalGroupId">Iiko Termonal Group ID</label>
+            </div>
+          </td>
+        </tr>
+
         <tr>
           <td colspan="2">
             <div class="input-field">
@@ -166,6 +202,7 @@ export default {
   async mounted() {
     this.select = window.M.FormSelect.init(this.$refs.selectprodkiosk);
     this.select2 = window.M.FormSelect.init(this.$refs.kioskName333);
+    this.select2 = window.M.FormSelect.init(this.$refs.kioskType333);
 
     window.M.updateTextFields();
   }

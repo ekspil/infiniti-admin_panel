@@ -109,7 +109,11 @@ export default {
       gate: null,
       stops: [],
       kiosks: [],
-      vip: false
+      vip: false,
+      type: "LOCAL",
+      iikoTerminalGroupId: null,
+      iikoOrganizationId: null,
+      atolInn: null
     }
   }),
   methods: {
@@ -149,7 +153,11 @@ export default {
           gate: null,
           stops: [],
           kiosks: [],
-          vip: false
+          vip: false,
+          type: "LOCAL",
+          iikoTerminalGroupId: null,
+          iikoOrganizationId: null,
+          atolInn: null
         };
       } else {
         this.kiosk = i;
