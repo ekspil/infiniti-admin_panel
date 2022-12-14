@@ -48,7 +48,11 @@
               </button>
             </td>
             <td>
-              <button class="btn-small btn" @click="command(us, 'logout')">
+              <button
+                class="btn-small btn"
+                @click="command(us, 'logout')"
+                :disabled="$store.state.auth.user.role !== 'ADMIN'"
+              >
                 <i class="material-icons">logout</i>
               </button>
             </td>
