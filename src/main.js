@@ -16,7 +16,7 @@ Vue.use(ElementUI, { locale });
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: "https://api.rb24.ru",
+    connection: "https://terminal-api.rb24.ru",
     vuex: {
       store,
       actionPrefix: "SOCKET_",

@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kiosk-admin
+  name: terminal-admin
   namespace: production
   labels:
-    app: kiosk-admin
+    app: terminal-admin
 spec:
   replicas: 1
   strategy:
@@ -14,16 +14,16 @@ spec:
       maxSurge: 50%
   selector:
     matchLabels:
-      app: kiosk-admin
+      app: terminal-admin
   template:
     metadata:
       namespace: production
       labels:
-        app: kiosk-admin
+        app: terminal-admin
     spec:
       containers:
-      - name: kiosk-admin
-        image: cr.yandex/crpbchff05ai3nceeln1/kiosk-admin:1.0.20
+      - name: terminal-admin
+        image: cr.yandex/crpbchff05ai3nceeln1/terminal-admin:1.0.21
         imagePullPolicy: Always
         ports:
           - containerPort: 80

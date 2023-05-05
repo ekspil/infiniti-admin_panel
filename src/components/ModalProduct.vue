@@ -12,7 +12,7 @@
           v-if="product.img"
           :src="
             product.img
-              ? 'https://api.rb24.ru/api/v1/files/download/1/' + product.img
+              ? 'https://terminal-api.rb24.ru/api/v1/files/download/1/' + product.img
               : '/burger.png'
           "
           height="50px"
@@ -227,7 +227,7 @@ export default {
       formData.append("file", this.file);
       try {
         await axios.post(
-          `https://api.rb24.ru/api/v1/files/upload/1/${this.file.name}`,
+          `https://terminal-api.rb24.ru/api/v1/files/upload/1/${this.file.name}`,
           formData,
           {
             headers: {
