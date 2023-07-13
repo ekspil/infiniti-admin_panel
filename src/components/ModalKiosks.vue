@@ -6,6 +6,18 @@
   >
     <div class="card-content">
       <span class="card-title">Киоск</span>
+      <br/>
+
+     <br />
+      <div class="input-field">
+        <input
+            class=""
+            type="file"
+            id="fileImg"
+            ref="fileImg"
+            v-on:change="handleFileUpload('fileImg')"
+        />
+      </div>
       <table>
         <tr>
           <td>
@@ -179,6 +191,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Modal",
   props: ["kiosk", "products"],
@@ -187,6 +201,28 @@ export default {
     interval: null
   }),
   methods: {
+    async handleFileUpload(fileName) {
+      this.file = this.$refs[fileName].files[0];
+      let formData = new FormData();
+      formData.append("file", this.file);
+      try {
+        await axios.post(
+            `https://terminal-api.rb24.ru/api/v1/files/upload/1/kiosk-bg-${this.kiosk.id}`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                authorization: "Bearer " + "1111111111"
+              }
+            }
+        );
+        this[fileName] = `kiosk-bg-${this.kiosk.id}`;
+        this.kiosk.kioskImg = `kiosk-bg-${this.kiosk.id}`;
+      } catch (e) {
+        console.log(e);
+        alert("Ошибка загрузки");
+      }
+    },
     close() {
       this.$emit("close");
     },
