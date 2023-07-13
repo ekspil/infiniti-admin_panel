@@ -207,7 +207,7 @@ export default {
       formData.append("file", this.file);
       try {
         await axios.post(
-            `https://terminal-api.rb24.ru/api/v1/files/upload/1/kiosk-bg-${this.kiosk.id}`,
+            `https://api.rb24.ru/api/v1/files/upload/1/kiosk-rb-bg-${this.kiosk.id}`,
             formData,
             {
               headers: {
@@ -216,8 +216,8 @@ export default {
               }
             }
         );
-        this[fileName] = `kiosk-bg-${this.kiosk.id}`;
-        this.kiosk.kioskImg = `kiosk-bg-${this.kiosk.id}`;
+        this[fileName] = `kiosk-rb-bg-${this.kiosk.id}`;
+        this.kiosk.kioskImg = `kiosk-rb-bg-${this.kiosk.id}`;
       } catch (e) {
         console.log(e);
         alert("Ошибка загрузки");
