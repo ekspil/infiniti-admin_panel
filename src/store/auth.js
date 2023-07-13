@@ -1,5 +1,5 @@
 import axios from "axios";
-const host = "localhost"
+const host = "terminal-api.rb24.ru"
 
 export default {
   state: {
@@ -28,7 +28,7 @@ export default {
   actions: {
     async login({ commit }, { login, password }) {
       const result = await axios.post(
-        "http://"+host+"/api/terminal/users/auth",
+        "https://"+host+"/api/terminal/users/auth",
         {
           login,
           password
