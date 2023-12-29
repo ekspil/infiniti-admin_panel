@@ -168,10 +168,7 @@
         <tr>
           <td>
             <div class="input-field">
-              <select ref="selectgroup" v-model="product.group_id">
-                <option value="" disabled selected
-                  >Выберете нужную группу</option
-                >
+              <select ref="selectgroup" multiple v-model="product.groups">
                 <option
                   v-for="item of groups"
                   :key="item.id"
@@ -179,7 +176,7 @@
                   >{{ item.name }}</option
                 >
               </select>
-              <label>Группа</label>
+              <label>Группы</label>
             </div>
           </td>
           <td><div class="input-field">

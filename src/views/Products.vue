@@ -100,7 +100,7 @@
               <span class="white-text badge red">{{ item.station }}</span>
             </td>
 
-            <td>{{ groupName(item.group_id) }}</td>
+            <td>{{ groupNames(item.groups) || groupName(item.group_id) }}</td>
             <td>
               <button class="btn-small btn" @click="openModal(item)">
                 <i class="material-icons">open_in_new</i>
@@ -158,6 +158,7 @@ export default {
       couponPrice: 9999,
       hidden: false,
       priority: 0,
+      groups: [],
       codeIiko: null,
     }
   }),
@@ -193,6 +194,17 @@ export default {
       if (!gr) return "";
       return gr.name;
     },
+    groupNames(ids) {
+      let string = ''
+      if(!ids || ids.length === 0) return ''
+      for(let id of ids){
+
+        const gr = this.groups.find(it => it.id === id);
+        if (!gr) return "";
+        string+= gr.name+ '; ' ;
+      }
+      return string
+    },
     async del(item) {
       item.action = "DELETE";
       const ok = await this.$store.dispatch("saveProduct", item);
@@ -219,7 +231,8 @@ export default {
           couponPrice: 9999,
           hidden: false,
           priority: 0,
-          codeIiko: null
+          codeIiko: null,
+          groups: [],
         };
       } else {
         this.product = JSON.parse(JSON.stringify(p));
