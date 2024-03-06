@@ -54,6 +54,16 @@
       :mods="mods"
       :kiosks="kiosks"
     />
+    <ModalProductDescription
+      v-if="items && groups && products && mods && isOpen"
+      @close_description="refresh_description()"
+      :items="items"
+      :groups="groups"
+      :product="product"
+      :mods="mods"
+      :helpers="helpers"
+      :kiosks="kiosks"
+    />
 
     <section v-if="products && groups">
       <table>
@@ -68,6 +78,7 @@
             <th>Станция</th>
             <th>Группа</th>
             <th>Открыть</th>
+            <th>Описание</th>
             <th></th>
           </tr>
         </thead>
@@ -108,6 +119,11 @@
             </td>
 
             <td>
+              <button class="btn-small btn" @click="description(item)">
+                <i class="material-icons">add</i>
+              </button>
+            </td>
+            <td>
               <button class="btn-small btn" @click="del(item)">
                 <i class="material-icons">delete</i>
               </button>
@@ -127,10 +143,12 @@
 
 <script>
 import ModalProduct from "@/components/ModalProduct";
+import ModalProductDescription from "@/components/ModalProductDescription";
 export default {
   name: "Products",
   components: {
-    ModalProduct
+    ModalProduct,
+    ModalProductDescription
   },
   data: () => ({
     selectedGroup: null,
@@ -138,10 +156,12 @@ export default {
     selectedKiosk: "ALL",
     products: null,
     modalProduct: null,
+    modalProductDescription: null,
     isOpen: false,
     items: null,
     groups: null,
     mods: null,
+    helpers: null,
     archive: false,
     product: {
       id: null,
@@ -160,6 +180,11 @@ export default {
       priority: 0,
       groups: [],
       codeIiko: null,
+      des_k: 0,
+      des_p: 0,
+      des_l: 0,
+      des_c: 0,
+      helpers: []
     }
   }),
   watch: {
@@ -233,6 +258,12 @@ export default {
           priority: 0,
           codeIiko: null,
           groups: [],
+          description: "",
+          des_k: 0,
+          des_p: 0,
+          des_l: 0,
+          des_c: 0,
+          helpers: []
         };
       } else {
         this.product = JSON.parse(JSON.stringify(p));
@@ -248,8 +279,53 @@ export default {
         this.isOpen = false;
       };
     },
+    async description(p) {
+      if (!p) {
+        this.product = {
+          id: null,
+          name: null,
+          items: [],
+          station: 1,
+          code: null,
+          kiosk: "ALL",
+          price: null,
+          archive: null,
+          mods: [],
+          img: null,
+          coupon: null,
+          couponPrice: 9999,
+          hidden: false,
+          priority: 0,
+          codeIiko: null,
+          groups: [],
+          description: "",
+          des_k: 0,
+          des_p: 0,
+          des_l: 0,
+          des_c: 0,
+          helpers: []
+        };
+      } else {
+        this.product = JSON.parse(JSON.stringify(p));
+      }
+      this.isOpen = true;
+      await this.$forceUpdate();
+      this.modalProductDescription = window.M.Modal.init(
+        document.querySelector(".modal-product-description"),
+        {}
+      );
+      this.modalProductDescription.open();
+      this.modalProductDescription.options.onCloseEnd = () => {
+        this.isOpen = false;
+      };
+    },
     async refresh() {
       this.modalProduct.close();
+      this.isOpen = false;
+      this.products = await this.$store.dispatch("getAllProducts", {});
+    },
+    async refresh_description() {
+      this.modalProductDescription.close();
       this.isOpen = false;
       this.products = await this.$store.dispatch("getAllProducts", {});
     }
@@ -264,6 +340,7 @@ export default {
     this.kiosks = await this.$store.dispatch("getAllKiosks", {});
     this.groups = await this.$store.dispatch("getAllGroups", {});
     this.mods = await this.$store.dispatch("getAllMods", {});
+    this.helpers = await this.$store.dispatch("getAllHelpers", {});
     this.select3 = window.M.FormSelect.init(this.$refs.selectkiosk);
     this.select4 = window.M.FormSelect.init(this.$refs.selectgroup);
     window.M.updateTextFields();
