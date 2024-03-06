@@ -119,7 +119,7 @@
             </td>
 
             <td>
-              <button class="btn-small btn" @click="description(item)">
+              <button class="btn-small btn" @click="description(item)" :disabled="$store.state.auth.user.role !== 'ADMIN'">
                 <i class="material-icons">add</i>
               </button>
             </td>
