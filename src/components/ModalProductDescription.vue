@@ -58,14 +58,14 @@
         <tr>
           <td>
             <div class="input-field">
-              <input id="prot" type="number" v-model="product.des_p" />
+              <input id="prot" type="number" step="0.1" v-model="product.des_p" />
               <label for="prot">Белки</label>
               <small v-if="false" class="helper-text invalid">Белки</small>
             </div>
           </td>
           <td>
             <div class="input-field">
-              <input id="lip" type="number" v-model="product.des_l" />
+              <input id="lip" type="number" step="0.1" v-model="product.des_l" />
               <label for="lip">Жиры</label>
               <small v-if="false" class="helper-text invalid">Жиры</small>
             </div>
@@ -74,14 +74,14 @@
         <tr>
           <td>
             <div class="input-field">
-              <input id="carb" type="number" v-model="product.des_c" />
+              <input id="carb" type="number" step="0.1" v-model="product.des_c" />
               <label for="carb">Углеводы</label>
               <small v-if="false" class="helper-text invalid">Углеводы</small>
             </div>
           </td>
           <td>
             <div class="input-field">
-              <input id="cal" type="number" v-model="product.des_k" />
+              <input id="cal" type="number" step="0.1" v-model="product.des_k" />
               <label for="cal">Каллории</label>
               <small v-if="false" class="helper-text invalid">Каллории</small>
             </div>

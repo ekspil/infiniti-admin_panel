@@ -206,7 +206,11 @@ export default {
       }
       if(this.selectedGroup !== null){
         p = this.products.filter(
-            product => product.group_id === this.selectedGroup
+            product => {
+              if(product.group_id === this.selectedGroup) return true
+              if(product.groups && product.groups.includes(this.selectedGroup)) return true
+              return false
+            }
         );
       }
       return p
