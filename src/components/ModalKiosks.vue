@@ -207,7 +207,7 @@ export default {
       formData.append("file", this.file);
       try {
         await axios.post(
-            `https://api.rb24.ru/api/v1/files/upload/1/kiosk-rb-bg-${this.kiosk.id}`,
+            `https://infiniti-kiosk-files-ekspil.amvera.io/api/v1/files/upload/1/kiosk-rb-bg-${this.kiosk.id}`,
             formData,
             {
               headers: {

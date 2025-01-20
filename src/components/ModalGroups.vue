@@ -12,7 +12,7 @@
           v-if="group.img"
           :src="
             group.img
-              ? 'https://api.rb24.ru/api/v1/files/download/1/' + group.img
+              ? 'https://infiniti-kiosk-files-ekspil.amvera.io/api/v1/files/download/1/' + group.img
               : '/burger.png'
           "
           height="50px"
@@ -72,7 +72,7 @@ export default {
       formData.append("file", this.file);
       try {
         await axios.post(
-          `https://api.rb24.ru/api/v1/files/upload/1/${this.file.name}`,
+          `https://infiniti-kiosk-files-ekspil.amvera.io/api/v1/files/upload/1/${this.file.name}`,
           formData,
           {
             headers: {

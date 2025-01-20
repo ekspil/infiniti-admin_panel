@@ -27,7 +27,7 @@
                 v-if="item.img"
                 :src="
                   item.img
-                    ? 'https://api.rb24.ru/api/v1/files/download/1/' +
+                    ? 'https://infiniti-kiosk-files-ekspil.amvera.io/api/v1/files/download/1/' +
                       item.img
                     : '/burger.png'
                 "
